@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item android:id="@+id/covered_movie_background"
+        android:drawable="@drawable/movie_4"/>
+
+
+
+    <item>
+        <shape>
+            <gradient android:startColor="@color/black_lighter"
+                android:centerColor="@android:color/transparent"
+                android:endColor="@color/black_lighter"
+                android:angle="90"/>
+        </shape>
+    </item>
+
+
+
+
+
+
+
+</layer-list>
