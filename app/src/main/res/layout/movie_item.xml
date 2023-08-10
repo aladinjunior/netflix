@@ -9,7 +9,7 @@
     <ImageView
         android:layout_marginHorizontal="5dp"
         android:id="@+id/movie_image"
-        android:src="@drawable/movie"
+        android:src="@drawable/movie_placeholder"
         android:scaleType="centerCrop"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

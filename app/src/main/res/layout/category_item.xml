@@ -21,7 +21,9 @@
        android:layout_below="@id/tv_category"
        android:id="@+id/rv_category"
        android:background="@color/black"
+       android:clipToPadding="false"
        tools:listitem="@layout/movie_item"
+       android:paddingHorizontal="8dp"
        android:layout_width="match_parent"
        android:layout_height="match_parent"/>
 
