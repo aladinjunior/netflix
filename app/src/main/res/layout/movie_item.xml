@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:text="hello world"
-    android:layout_marginTop="9dp"
-    android:layout_marginStart="9dp"
-    android:background="@color/red"
-    android:textStyle="bold"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    tools:showIn="@layout/category_item"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_marginHorizontal="5dp"
+        android:id="@+id/movie_image"
+        android:src="@drawable/movie"
+        android:scaleType="centerCrop"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintDimensionRatio="9:16"/>
 
 
 
-</TextView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

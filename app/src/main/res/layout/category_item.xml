@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/black"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    tools:context=".MainActivity">
+
+   <TextView
+       android:layout_marginVertical="3dp"
+       android:layout_marginStart="5dp"
+       android:id="@+id/tv_category"
+       android:textColor="@color/white"
+       android:text="@string/category_name_example"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"/>
+
+   <androidx.recyclerview.widget.RecyclerView
+       android:layout_below="@id/tv_category"
+       android:id="@+id/rv_category"
+       android:background="@color/black"
+       tools:listitem="@layout/movie_item"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"/>
+
+</RelativeLayout>

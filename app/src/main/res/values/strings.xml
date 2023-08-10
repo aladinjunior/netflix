@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">NetflixRemake</string>
+    <string name="category_name_example">categoria</string>
 </resources>
