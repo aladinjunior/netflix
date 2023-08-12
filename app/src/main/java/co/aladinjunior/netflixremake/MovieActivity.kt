@@ -6,6 +6,10 @@ import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import co.aladinjunior.netflixremake.model.Movie
 
 class MovieActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +27,16 @@ class MovieActivity : AppCompatActivity() {
         layerDrawable.setDrawableByLayerId(R.id.covered_movie_background, bgDrawable)
         val movieBackground: ImageView = findViewById(R.id.movie_background)
         movieBackground.setImageDrawable(layerDrawable)
+
+        val movies = mutableListOf<Movie>()
+        for (i in 0 until 10){
+            movies.add(Movie(R.drawable.movie))
+        }
+
+        val adapter = MovieAdapter(movies)
+        val rv = findViewById<RecyclerView>(R.id.rv_similar)
+        rv.layoutManager = GridLayoutManager(this, 3, RecyclerView.VERTICAL, false)
+        rv.adapter = adapter
 
     }
 }
