@@ -4,8 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_below="@id/movie_background"
     android:background="@color/black"
     tools:context=".MovieActivity">
+
+
 
 
     <ImageView
@@ -16,6 +19,11 @@
         android:src="@drawable/movie_background_shadows"
         app:layout_constraintDimensionRatio="16:9"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        app:layout_constraintTop_toBottomOf="@id/movie_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/movie_toolbar"
@@ -34,6 +42,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/movie_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -42,6 +51,13 @@
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="@id/movie_background"
         android:text="@string/movie_name" />
+
+<!--    <ScrollView-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/movie_name"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp">-->
 
     <TextView
         android:id="@+id/movie_sinopse"
@@ -70,20 +86,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <ScrollView
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/movie_similar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
+
 
         <androidx.recyclerview.widget.RecyclerView
+            app:layout_constraintTop_toBottomOf="@id/movie_similar"
             android:id="@+id/rv_similar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
+            android:layout_height="0dp"/>
 
     </ScrollView>
+
+
+<!--    </ScrollView>-->
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

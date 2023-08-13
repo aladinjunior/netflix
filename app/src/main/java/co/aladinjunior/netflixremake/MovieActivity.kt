@@ -33,7 +33,7 @@ class MovieActivity : AppCompatActivity() {
             movies.add(Movie(R.drawable.movie))
         }
 
-        val adapter = MovieAdapter(movies)
+        val adapter = MovieAdapter(movies, R.layout.movie_similar_item)
         val rv = findViewById<RecyclerView>(R.id.rv_similar)
         rv.layoutManager = GridLayoutManager(this, 3, RecyclerView.VERTICAL, false)
         rv.adapter = adapter

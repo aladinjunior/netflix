@@ -4,12 +4,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import co.aladinjunior.netflixremake.model.Movie
 
-class MovieAdapter(private val moviesList: List<Movie>) : RecyclerView.Adapter<MovieAdapter.ViewHolder>(){
+class MovieAdapter(
+    private val moviesList: List<Movie>,
+    @LayoutRes private val layoutId: Int
+) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieAdapter.ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.movie_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(layoutId, parent, false)
         return ViewHolder(view)
     }
 
@@ -22,11 +26,11 @@ class MovieAdapter(private val moviesList: List<Movie>) : RecyclerView.Adapter<M
         return moviesList.size
     }
 
-     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
-         fun bind(movie: Movie){
-             val movieImage = itemView.findViewById<ImageView>(R.id.movie_image)
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        fun bind(movie: Movie) {
+            val movieImage = itemView.findViewById<ImageView>(R.id.movie_image)
 
-         }
+        }
     }
 
 }
