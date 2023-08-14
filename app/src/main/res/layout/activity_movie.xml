@@ -1,104 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_below="@id/movie_background"
-    android:background="@color/black"
-    tools:context=".MovieActivity">
+    android:layout_height="match_parent">
 
 
-
-
-    <ImageView
-        android:id="@+id/movie_background"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/movie_background_shadows"
-        app:layout_constraintDimensionRatio="16:9"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        tools:context=".MovieActivity">
 
-    <ScrollView
-        app:layout_constraintTop_toBottomOf="@id/movie_background"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/movie_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/movie_background"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/movie_background_shadows"
+            app:layout_constraintDimensionRatio="16:9"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:src="@drawable/ic_play"
-        app:layout_constraintBottom_toBottomOf="@id/movie_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/movie_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginBottom="20dp"
-        android:textColor="@color/white"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="@id/movie_background"
-        android:text="@string/movie_name" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/movie_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-<!--    <ScrollView-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/movie_name"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp">-->
+        <ImageView
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:src="@drawable/ic_play"
+            app:layout_constraintBottom_toBottomOf="@id/movie_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/movie_sinopse"
-        style="@style/TextViewMovieScreenStyle"
-        app:layout_constraintTop_toBottomOf="@id/movie_background"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/movie_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/movie_name"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="@id/movie_background" />
 
-    <TextView
-        android:id="@+id/movie_cast"
-        style="@style/TextViewMovieScreenStyle"
-        android:textColor="@color/gray_darker"
-        app:layout_constraintTop_toBottomOf="@id/movie_sinopse"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/movie_similar"
-        android:textStyle="bold"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="15dp"
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/movie_cast"
-        android:text="@string/similar_options"
-        android:textColor="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/movie_sinopse"
+            style="@style/TextViewMovieScreenStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/movie_background" />
 
+        <TextView
+            android:id="@+id/movie_cast"
+            style="@style/TextViewMovieScreenStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gray_darker"
+            app:layout_constraintTop_toBottomOf="@id/movie_sinopse" />
+
+        <TextView
+            android:id="@+id/movie_similar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/similar_options"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/movie_cast" />
 
 
         <androidx.recyclerview.widget.RecyclerView
-            app:layout_constraintTop_toBottomOf="@id/movie_similar"
             android:id="@+id/rv_similar"
             android:layout_width="match_parent"
-            android:layout_height="0dp"/>
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/movie_similar" />
 
-    </ScrollView>
-
-
-<!--    </ScrollView>-->
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
