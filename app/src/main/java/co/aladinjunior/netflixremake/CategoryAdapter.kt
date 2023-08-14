@@ -27,7 +27,7 @@ class CategoryAdapter(val categories: List<Category>) : RecyclerView.Adapter<Cat
      inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         fun bind(category: Category){
             val categoryName = itemView.findViewById<TextView>(R.id.tv_category)
-            categoryName.text = category.categoryName
+            categoryName.text = category.title
 
             val categoryRV = itemView.findViewById<RecyclerView>(R.id.rv_category)
             categoryRV.layoutManager = LinearLayoutManager(itemView.context, RecyclerView.HORIZONTAL, false)
