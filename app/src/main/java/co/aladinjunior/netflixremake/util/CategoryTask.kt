@@ -1,5 +1,7 @@
 package co.aladinjunior.netflixremake.util
 
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import co.aladinjunior.netflixremake.model.Category
 import co.aladinjunior.netflixremake.model.Movie
@@ -10,10 +12,19 @@ import java.net.URL
 import java.util.concurrent.Executors
 import javax.net.ssl.HttpsURLConnection
 
-class CategoryTask {
+class CategoryTask(private val callback: CallBack) {
+
+    interface CallBack{
+        fun onStartCall()
+        fun onSuccess(categories: List<Category>)
+        fun onFailure(message: String)
+
+
+    }
 
     fun execute(url: String) {
 
+        val handler = Handler(Looper.getMainLooper())
         val executor = Executors.newSingleThreadExecutor()
 
         executor.execute {
@@ -32,14 +43,18 @@ class CategoryTask {
 
                 stream = connection.inputStream
                 val jsonAsString = stream.bufferedReader().use { it.readText() }
-
                 val categories = toCategories(jsonAsString)
 
-                Log.i("test", categories.toString())
+                handler.post {
+                    callback.onSuccess(categories)
+                }
+
+
+
 
 
             } catch (e: IOException) {
-                Log.e("test", e.message ?: "erro desconhecido", e)
+                callback.onFailure(e.message ?: "erro desconhecido")
             } finally {
                 connection?.disconnect()
                 stream?.close()
@@ -50,10 +65,12 @@ class CategoryTask {
 
 
 
+
         }
 
 
     }
+
 
     fun toCategories(jsonAsString: String) : List<Category> {
         val categories = mutableListOf<Category>()
