@@ -1,5 +1,6 @@
 package co.aladinjunior.netflixremake
 
+import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import android.widget.ImageView
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import co.aladinjunior.netflixremake.model.Movie
+import co.aladinjunior.netflixremake.util.DownloadImageTask
 
 class MovieAdapter(
     private val moviesList: List<Movie>,
@@ -27,8 +29,15 @@ class MovieAdapter(
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(movie: Movie) {
+        fun bind(movie: Movie)  {
             val movieImage = itemView.findViewById<ImageView>(R.id.movie_image)
+            DownloadImageTask(object : DownloadImageTask.CallBack{
+                override fun onSuccess(bitmap: Bitmap) {
+                    movieImage.setImageBitmap(bitmap)
+                }
+
+            }).execute(movie.coverUrl)
+
 
         }
     }

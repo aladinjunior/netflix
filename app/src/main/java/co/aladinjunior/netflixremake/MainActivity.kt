@@ -14,6 +14,10 @@ import co.aladinjunior.netflixremake.util.CategoryTask
 
 class MainActivity : AppCompatActivity(), CategoryTask.CallBack {
     private lateinit var progress: ProgressBar
+    private lateinit var adapter: CategoryAdapter
+    private val categories = mutableListOf<Category>()
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,23 +27,30 @@ class MainActivity : AppCompatActivity(), CategoryTask.CallBack {
         progress = findViewById(R.id.main_progress)
 
 
-        val categories = mutableListOf<Category>()
+
+
+
+
 
         CategoryTask(this).execute("https://api.tiagoaguiar.co/netflixapp/home?apiKey=454207e4-a780-4ba1-968a-cc22f29d3eae")
 
 
 
         val rv = findViewById<RecyclerView>(R.id.rv_main)
-        val adapter = CategoryAdapter(categories)
+        adapter = CategoryAdapter(categories)
         rv.layoutManager = LinearLayoutManager(this)
         rv.adapter = adapter
 
 
     }
 
-    override fun onSuccess(categories: List<Category>) {
-        Log.i("test activity", categories.toString())
+    override fun onSuccess(categories: List<Category>)  {
+        this.categories.clear()
+        this.categories.addAll(categories)
+        adapter.notifyDataSetChanged()
         progress.visibility = View.GONE
+
+
     }
 
     override fun onFailure(message: String) {
