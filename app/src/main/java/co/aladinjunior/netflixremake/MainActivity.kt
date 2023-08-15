@@ -1,5 +1,6 @@
 package co.aladinjunior.netflixremake
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -37,7 +38,14 @@ class MainActivity : AppCompatActivity(), CategoryTask.CallBack {
 
 
         val rv = findViewById<RecyclerView>(R.id.rv_main)
-        adapter = CategoryAdapter(categories)
+        adapter = CategoryAdapter(categories, object : OnMovieClickListener {
+            override fun onClick(id: Int) {
+                val i = Intent(this@MainActivity, MovieActivity::class.java)
+                startActivity(i)
+                Log.i("test", "clicou no id $id")
+            }
+
+        })
         rv.layoutManager = LinearLayoutManager(this)
         rv.adapter = adapter
 

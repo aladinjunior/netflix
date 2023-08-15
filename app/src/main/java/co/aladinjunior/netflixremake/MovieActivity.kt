@@ -31,7 +31,10 @@ class MovieActivity : AppCompatActivity() {
         val movies = mutableListOf<Movie>()
 
 
-        val adapter = MovieAdapter(movies, R.layout.movie_similar_item)
+        val adapter = MovieAdapter(movies, R.layout.movie_similar_item, object : OnMovieClickListener{
+            override fun onClick(id: Int) {
+            }
+        })
         val rv = findViewById<RecyclerView>(R.id.rv_similar)
         rv.layoutManager = GridLayoutManager(this, 3, RecyclerView.VERTICAL, false)
         rv.adapter = adapter
