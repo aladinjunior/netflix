@@ -1,5 +1,9 @@
 package co.aladinjunior.netflixremake
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,13 +11,20 @@ import android.view.MenuItem
 import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.createBitmap
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import co.aladinjunior.netflixremake.model.Movie
+import co.aladinjunior.netflixremake.util.DownloadImageTask
 import co.aladinjunior.netflixremake.util.MovieTask
 
-class MovieActivity : AppCompatActivity() {
+class MovieActivity : AppCompatActivity(), MovieTask.CallBack {
+
+    private val url = "https://api.tiagoaguiar.co/netflixapp/movie/1?apiKey=454207e4-a780-4ba1-968a-cc22f29d3eae"
+//    private var bgDrawable: Drawable? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie)
@@ -26,17 +37,19 @@ class MovieActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.title = null
 
-        val layerDrawable: LayerDrawable = ContextCompat.getDrawable(this, R.drawable.movie_background_shadows) as LayerDrawable
-        val bgDrawable = ContextCompat.getDrawable(this, R.drawable.movie_4)
-        layerDrawable.setDrawableByLayerId(R.id.covered_movie_background, bgDrawable)
-        val movieBackground: ImageView = findViewById(R.id.movie_background)
-        movieBackground.setImageDrawable(layerDrawable)
+
+
+
+
+
+
+
 
 
 
         val movies = mutableListOf<Movie>()
 
-        MovieTask().execute("https://api.tiagoaguiar.co/netflixapp/movie/1?apiKey=454207e4-a780-4ba1-968a-cc22f29d3eae")
+        MovieTask(this).execute(url)
 
 
 
@@ -53,5 +66,26 @@ class MovieActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == android.R.id.home) finish()
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onSuccess(movie: Movie) {
+
+        DownloadImageTask(object : DownloadImageTask.CallBack{
+            override fun onSuccess(bitmap: Bitmap) {
+               val x: Drawable = BitmapDrawable(this@MovieActivity.resources, bitmap)
+
+                val layerDrawable: LayerDrawable = ContextCompat.getDrawable(this@MovieActivity, R.drawable.movie_background_shadows) as LayerDrawable
+                layerDrawable.setDrawableByLayerId(R.id.covered_movie_background, x)
+                val movieBackground: ImageView = findViewById(R.id.movie_background)
+                movieBackground.setImageDrawable(layerDrawable)
+
+            }
+
+        }).execute(movie.coverUrl)
+
+
+
+
+
     }
 }

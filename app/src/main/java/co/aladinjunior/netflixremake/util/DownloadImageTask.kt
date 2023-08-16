@@ -13,8 +13,8 @@ import javax.net.ssl.HttpsURLConnection
 
 class DownloadImageTask(private val callback: CallBack) {
 
-    val executor = Executors.newSingleThreadExecutor()
-    val handler = Handler(Looper.getMainLooper())
+    private val executor = Executors.newSingleThreadExecutor()
+    private val handler = Handler(Looper.getMainLooper())
 
     interface CallBack{
         fun onSuccess(bitmap: Bitmap)

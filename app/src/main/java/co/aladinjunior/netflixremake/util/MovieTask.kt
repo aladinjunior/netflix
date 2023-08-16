@@ -12,7 +12,12 @@ import java.util.concurrent.Executors
 import javax.net.ssl.HttpsURLConnection
 
 
-class MovieTask {
+class MovieTask(private val callback: CallBack) {
+
+    interface CallBack{
+        fun onSuccess(movie: Movie)
+
+    }
 
     fun execute(url: String) {
         val executor = Executors.newSingleThreadExecutor()
@@ -27,8 +32,10 @@ class MovieTask {
                 if(connect.responseCode > 400) throw IOException("Erro na comunicação com o servidor!")
                 stream = connect.inputStream
                 val stringJson = stream.bufferedReader().use { it.readText() }
-                val x = parseMovie(stringJson)
-                Log.i("test", "$x")
+                val movie = parseMovie(stringJson)
+                handler.post {
+                    callback.onSuccess(movie)
+                }
 
 
             } catch (e: IOException) {
