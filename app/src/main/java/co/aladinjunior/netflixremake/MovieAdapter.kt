@@ -45,8 +45,7 @@ class MovieAdapter(
                 onMovieClickListener.onClick(movie.id)
             }
 
-            val movieSimilarImage = itemView.findViewById<ImageView>(R.id.movie_similar_image)
-            movieSimilarImage ?: Log.i("test", "objeto nulo")
+
 //            DownloadImageTask(object : DownloadImageTask.CallBack {
 //                override fun onSuccess(bitmap: Bitmap) {
 //                    movieSimilarImage.setImageBitmap(bitmap)

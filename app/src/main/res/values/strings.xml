@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">NetflixRemake</string>
     <string name="category_name_example">categoria</string>
-    <string name="movie_name">Movie Name</string>
+    <string name="movie_name">%1$s</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet. Ea nisi omnis est fuga deleniti et repellat Quis vel dolores distinctio. Ut modi asperiores aut enim quia sed provident perspiciatis et quibusdam numquam aut voluptatum inventore.</string>
     <string name="similar_options">SIMILAR OPTIONS</string>
+    <string name="movie_sinopse">%1$s</string>
+    <string name="movie_cast">%1$s</string>
 </resources>
