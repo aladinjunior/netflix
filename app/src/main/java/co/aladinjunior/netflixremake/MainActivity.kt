@@ -41,8 +41,8 @@ class MainActivity : AppCompatActivity(), CategoryTask.CallBack {
         adapter = CategoryAdapter(categories, object : OnMovieClickListener {
             override fun onClick(id: Int) {
                 val i = Intent(this@MainActivity, MovieActivity::class.java)
+                    .putExtra("id", id)
                 startActivity(i)
-                Log.i("test", "clicou no id $id")
             }
 
         })

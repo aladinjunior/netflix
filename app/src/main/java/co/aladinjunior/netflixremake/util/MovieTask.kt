@@ -3,10 +3,13 @@ package co.aladinjunior.netflixremake.util
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.widget.Toast
 import co.aladinjunior.netflixremake.model.Movie
 import org.json.JSONObject
 import java.io.IOException
 import java.io.InputStream
+import java.lang.Exception
+import java.lang.IllegalStateException
 import java.net.URL
 import java.util.concurrent.Executors
 import javax.net.ssl.HttpsURLConnection
@@ -16,6 +19,7 @@ class MovieTask(private val callback: CallBack) {
 
     interface CallBack{
         fun onSuccess(movie: Movie)
+        fun onFailure(message: String)
 
     }
 
@@ -29,7 +33,12 @@ class MovieTask(private val callback: CallBack) {
             try {
                 val requestURL = URL(url)
                 connect = requestURL.openConnection() as HttpsURLConnection
-                if(connect.responseCode > 400) throw IOException("Erro na comunicação com o servidor!")
+                if(connect.responseCode == 400) {
+                    stream = connect.errorStream
+                    val stringJson = stream.bufferedReader().use { it.readText() }
+                    val message = parseString(stringJson)
+                    throw IllegalStateException(message)
+                } else if(connect.responseCode > 400) throw IOException("Erro na comunicação com o servidor!")
                 stream = connect.inputStream
                 val stringJson = stream.bufferedReader().use { it.readText() }
                 val movie = parseMovie(stringJson)
@@ -38,7 +47,10 @@ class MovieTask(private val callback: CallBack) {
                 }
 
 
-            } catch (e: IOException) {
+            } catch (e: IllegalStateException) {
+                handler.post {
+                    callback.onFailure(e.message!!)
+                }
 
             } finally {
                 connect?.disconnect()
@@ -65,5 +77,11 @@ class MovieTask(private val callback: CallBack) {
         }
 
         return Movie(id, coverUrl, title, description, cast, movies)
+    }
+
+    private fun parseString(stringJson: String) : String {
+        val root = JSONObject(stringJson)
+        val message = root.getString("message")
+        return message
     }
 }

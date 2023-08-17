@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
-        android:id="@+id/movie_similar_image"
+        android:id="@+id/movie_image"
         android:layout_marginTop="8dp"
         android:layout_marginHorizontal="4dp"
         android:scaleType="centerCrop"
