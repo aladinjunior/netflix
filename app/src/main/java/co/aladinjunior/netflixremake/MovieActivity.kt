@@ -50,6 +50,7 @@ class MovieActivity : AppCompatActivity(), MovieTask.CallBack {
         supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_ios_24)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.title = null
+        
 
         val id =
             intent.extras?.getInt("id") ?: throw IOException("filme com id inválido!")
